@@ -1,0 +1,3 @@
+copier tous les arguments et str statiques
+chaque maillon de liste chaînée est une commande ou bloc de texte
+regrouper tous les maillons à la fin de la fonction pour tout afficher d'un coup

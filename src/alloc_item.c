@@ -6,7 +6,7 @@
 /*   By: pichrist <pichrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 15:07:35 by pichrist          #+#    #+#             */
-/*   Updated: 2017/09/24 19:37:15 by pichrist         ###   ########.fr       */
+/*   Updated: 2017/10/03 19:19:16 by pichrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ t_mem	*alloc_item(char c)
 	if (item == NULL)
 		exit(1);
 	item->type = c;
+	item->options = ft_strnew(0);
 	return (item);
 }
