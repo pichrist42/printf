@@ -1,42 +1,42 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
+#include "libft/libft.h"
+#include "includes/ft_printf.h"
 
 int main(){
 	int do_test;
 	int disp;
 
-	do_test = 1;
-	disp = 1;
+	do_test = 0;
+	disp = 0;
 	if (do_test){
-		if (disp) ft_putstr("test with no input\n");
+		if (disp) ft_putstr("no input\n");
 		assert(ft_printf("") == 0);
 	}
 	do_test = 1;
 	if (do_test){
-		if (disp) ft_putstr("[abcde] : [");
+		if (disp) ft_putstr("input only static string - [abcde] : [");
 		ft_printf("abcde");
 		// assert(ft_printf("abcde") == 5);
 		if (disp) ft_putendl("]");
 	}
-	do_test = 1;
+	do_test = 0;
 	if (do_test)
 	{
-		if (disp) ft_putstr("[42] : [");
+		if (disp) ft_putstr("input var int - [42] : [");
 		assert(ft_printf("%d", 42) == 2);
 		if (disp) ft_putendl("]");
 
-		if (disp) ft_putstr("[c] : [");
+		if (disp) ft_putstr("input var char - [c] : [");
 		assert(ft_printf("%c", 'c') == 1);
 		if (disp) ft_putendl("]");
 
-		if (disp) ft_putstr("[str] : [");
+		if (disp) ft_putstr("input var str - [str] : [");
 		assert(ft_printf("%s", "str") == 3);
 		if (disp) ft_putendl("]");
-	}
-	do_test = 0;
-	if (do_test){
-		if (disp) ft_putstr("[1.567] : [");
+		
+		if (disp) ft_putstr("input var dbl - [1.567] : [");
 		ft_printf("%d", 1.567);
 		if (disp) ft_putendl("]");
 

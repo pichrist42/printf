@@ -6,7 +6,7 @@
 /*   By: pichrist <pichrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 00:04:39 by pichrist          #+#    #+#             */
-/*   Updated: 2017/09/24 20:45:57 by pichrist         ###   ########.fr       */
+/*   Updated: 2017/10/03 12:59:37 by pichrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,34 @@
 	renvoyer
 */
 
+void	debug_list(t_mem *first)
+{
+	t_mem *item = first;
+	int i = 0;
+	while (item){
+		ft_putstr("item ");
+		ft_putnbr(i);
+		ft_putstr("\ntype ");
+		ft_putchar(item->type);
+		ft_putstr("\nval_int ");
+		ft_putnbr(item->val_int);
+		if (item->val_str){
+			ft_putstr("\nval_str ");
+			ft_putstr(item->val_str);
+		}
+		else ft_putstr("\nno val_str");
+		ft_putstr("\nval_dbl ");
+		ft_putnbr(item->val_dbl);
+		ft_putendl("");
+		if (item->next)
+			item = item->next;
+		else{
+			ft_putendl("no more item");
+			break;
+		}
+	}
+}
+
 int		ft_printf(const char *format, ...)
 {
 	char	*output;
@@ -42,6 +70,7 @@ int		ft_printf(const char *format, ...)
 	{
 		va_start(ap, format);
 		first = parse(format);	// add later options for input array
+		debug_list(first);
 		output = handle_list(format, first, ap);
 		display(output);	// add later options for output fd
 		va_end(ap);
