@@ -6,17 +6,46 @@
 /*   By: pichrist <pichrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 18:18:03 by pichrist          #+#    #+#             */
-/*   Updated: 2017/10/04 01:18:18 by pichrist         ###   ########.fr       */
+/*   Updated: 2017/10/08 16:52:59 by pichrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
+char	*handle_list(t_mem *item, va_list ap){
+	char *output = ft_strnew(0);
+	char *tmp;
+
+	while(item->type){
+		// debug_char("following item -> type:", item->type);
+		if (item->type == 's' || item->type == 'S'){
+			if (!(item->val_str))
+				item->val_str = va_arg(ap, char*);
+			if (item->type == 'S')
+				ft_strtoupper(item->val_str);
+			output = ft_strjoin(output, item->val_str);
+		}
+		else if (item->type == 'd' || item->type == 'D')
+			output = ft_strjoin(output, ft_itoa(va_arg(ap, int)));
+		else if (item->type == 'c' || item->type == 'C'){
+			tmp = ft_strnew(1);
+			tmp[0] = va_arg(ap, int);
+			if (item->type == 'C')
+				ft_toupper(tmp[0]);
+			output = ft_strjoin(output, tmp);
+		}
+		item = item->next;
+	}
+	return (output);
+}
+
+/*
 int		get_var(t_mem *item, va_list ap)
 {
 	// if (item->type == 'd' || item->type == 'D')
 	// 	item->int_value = va_arg(ap, int);
-	/*else */if (item->type == 'c' || item->type == 'C')
+	// else 
+	if (item->type == 'c' || item->type == 'C')
 		item->val_int = va_arg(ap, int);
 	else if (item->type == 's' || item->type == 'S')
 		item->val_str = va_arg(ap, char*);
@@ -45,34 +74,6 @@ int		ft_tmemiter(t_mem *item, int (*f)(t_mem *item, va_list ap), va_list ap)
 	return (i);
 }
 
-char	*handle_list(t_mem *item, va_list ap){
-	char *output = ft_strnew(0);
-	char *tmp;
-
-	while(item->type){
-		// debug_char("following item -> type:", item->type);
-		if (item->type == 's' || item->type == 'S'){
-			(item->val_str) ? item->val_str : va_arg(ap, char*);
-			// if (item->val_str)
-			if (item->type == 'S')
-				ft_strtoupper(item->val_str);
-			output = ft_strjoin(output, item->val_str);
-		}
-		else if (item->type == 'd' || item->type == 'D')
-			output = ft_strjoin(output, ft_itoa(va_arg(ap, int)));
-		else if (item->type == 'c' || item->type == 'C'){
-			tmp = ft_strnew(1);
-			tmp[0] = va_arg(ap, int);
-			if (item->type == 'C')
-				ft_toupper(tmp[0]);
-			output = ft_strjoin(output, tmp);
-		}
-		item = item->next;
-	}
-	return (output);
-}
-
-/*
 char	*handle_list(const char *format, t_mem *first, va_list ap)
 {
 	char	*output;

@@ -6,7 +6,7 @@
 /*   By: pichrist <pichrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/28 00:04:39 by pichrist          #+#    #+#             */
-/*   Updated: 2017/10/03 18:30:58 by pichrist         ###   ########.fr       */
+/*   Updated: 2017/10/08 16:57:08 by pichrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	debug_list(t_mem *first)
 {
 	t_mem *item = first;
 	int i = 0;
-	ft_putendl("debugging list:\n");
+	ft_putendl("debugging list:");
 	while (item){
 		ft_putstr("item ");
 		ft_putnbr(i);
@@ -53,23 +53,25 @@ void	debug_list(t_mem *first)
 			ft_putendl("no more item");
 			break;
 		}
+		++i;
 	}
 }
 
 int		ft_printf(const char *format, ...)
 {
 	char	*output;
-	// int		length;
 	t_mem	*first;
 	va_list	ap;
+	int debug = 1;
 
 	if (!ft_strlen(format))
 		return (0);
 	else
 	{
+		if (debug) ft_putendl("");
 		va_start(ap, format);
 		first = parse(format);	// add later options for input array
-		// debug_list(first);
+		if (debug) debug_list(first);
 		output = handle_list(first, ap);
 		display(output);	// add later options for output fd
 		va_end(ap);
@@ -78,7 +80,6 @@ int		ft_printf(const char *format, ...)
 }
 
 /*
-
 char* itoa(int value, char* result, int base) {
 	// check that the base if valid
 	if (base < 2 || base > 36) { *result = '\0'; return result; }

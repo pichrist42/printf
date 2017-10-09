@@ -8,38 +8,28 @@ int main(){
 	int do_test;
 	int disp;
 
-	do_test = 1;
+	do_test = 0;
 	disp = 1;
 	if (do_test){
 		if (disp) ft_putstr("- no input\n\t-> ");
 		assert(ft_printf("") == 0);
 		if (disp) ft_putendl("handled fine");
+		if (disp) ft_putstr("- only static string\n\t[abcde] -> [");
+		assert(ft_printf("abcde") == 5);
+		if (disp) ft_putendl("]");
+		if (disp) ft_putstr("- var int\n\t[42] -> [");
+		assert(ft_printf("%d", 42) == 2);
+		if (disp) ft_putendl("]");
+		if (disp) ft_putstr("- var char\n\t[c] -> [");
+		assert(ft_printf("%c", 'c') == 1);
+		if (disp) ft_putendl("]");
+		if (disp) ft_putstr("- var str\n\t[str] -> [");
+		assert(ft_printf("%s", "str") == 3);
+		if (disp) ft_putendl("]");
 	}
 	do_test = 1;
 	if (do_test){
-		if (disp) ft_putstr("- only static string\n[abcde] -> [");
-		assert(ft_printf("abcde") == 5);
-		if (disp) ft_putendl("]");
-	}
-	do_test = 1;
-	if (do_test)
-	{
-		if (disp) ft_putstr("- var int\n[42] -> [");
-		assert(ft_printf("%d", 42) == 2);
-		if (disp) ft_putendl("]");
-	}
-	do_test = 1;
-	if (do_test)
-	{
-		if (disp) ft_putstr("- var char\n[c] -> [");
-		assert(ft_printf("%c", 'c') == 1);
-		if (disp) ft_putendl("]");
-
-		if (disp) ft_putstr("- var str\n[str] -> [");
-		assert(ft_printf("%s", "str") == 3);
-		if (disp) ft_putendl("]");
-		
-		if (disp) ft_putstr("- var dbl\n[1.567] -> [");
+		if (disp) ft_putstr("- var dbl\n\t[1.567] -> [");
 		ft_printf("%d", 1.567);
 		if (disp) ft_putendl("]");
 
